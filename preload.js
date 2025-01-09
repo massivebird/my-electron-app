@@ -1,4 +1,5 @@
 const { contextBridge } = require('electron/renderer')
+const fs = require("node:fs")
 
 contextBridge.exposeInMainWorld('versions', {
    node: () => process.versions.node,
@@ -8,10 +9,12 @@ contextBridge.exposeInMainWorld('versions', {
 
 contextBridge.exposeInMainWorld('file', {
    createFile: () => {
-      const file = new File(["Hello, World!"], "electronfile", { type: "text/plain" });
-      fs.writeFile('mynewfile3.txt', 'Hello content!', function(err) {
+      const path = '/tmp/electronfile'
+      const contents = "Garrett's Electron app sends its regards"
+
+      fs.writeFile(path, contents, function(err) {
          if (err) throw err;
-         console.log('Saved!');
+         console.log(`Wrote file ${path}.`);
       });
    }
 })
