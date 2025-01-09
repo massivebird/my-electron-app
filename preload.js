@@ -7,14 +7,18 @@ contextBridge.exposeInMainWorld('versions', {
    electron: () => process.versions.electron
 })
 
+const path = '/tmp/electronfile'
+const contents = "Garrett's Electron app sends its regards"
+
 contextBridge.exposeInMainWorld('file', {
    createFile: () => {
-      const path = '/tmp/electronfile'
-      const contents = "Garrett's Electron app sends its regards"
-
       fs.writeFile(path, contents, function(err) {
          if (err) throw err;
          console.log(`Wrote file ${path}.`);
       });
+   },
+   removeFile: () => {
+      fs.rm(path, function () {}) // is a dummy function a valid callback?
+      console.log(`Removed file ${path}.`)
    }
 })
