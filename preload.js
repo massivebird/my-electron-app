@@ -1,12 +1,6 @@
 const { contextBridge } = require('electron/renderer')
 const fs = require("node:fs")
 
-contextBridge.exposeInMainWorld('versions', {
-   node: () => process.versions.node,
-   chrome: () => process.versions.chrome,
-   electron: () => process.versions.electron
-})
-
 const path = '/tmp/electronfile'
 const contents = "Garrett's Electron app sends its regards"
 
