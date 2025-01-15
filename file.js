@@ -7,16 +7,17 @@ document.getElementById("removeButton").onclick = function() {
 }
 
 document.getElementById("viewButton").onclick = function() {
-   const element = document.getElementById("contents");
-
-   const timestamp = window.file.getTimeStamp().substring(0, 8);
+   const setText = function (string) {
+      const timestamp = window.file.getTimeStamp().substring(0, 8);
+      document.getElementById("contents").innerHTML = `${timestamp} : ${string}`
+   }
 
    if (!window.file.fileExists()) {
-      element.innerHTML = `${timestamp} : File does not exist.`
+      setText(`File does not exist.`)
       return;
    }
 
    const contents = window.file.getFileContents();
 
-   element.innerText = `${timestamp} : ${contents}`;
+   setText(`${contents}`);
 }
