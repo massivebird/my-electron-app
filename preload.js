@@ -14,5 +14,8 @@ contextBridge.exposeInMainWorld('file', {
    removeFile: () => {
       fs.rm(path, function () {}) // is a dummy function a valid callback?
       console.log(`Removed file ${path}.`)
+   },
+   getFileContents: () => {
+      return fs.readFileSync(path).toString();
    }
 })
